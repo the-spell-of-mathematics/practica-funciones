@@ -1,9 +1,8 @@
-/* Importación de la tipografía retro pixelada */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-  background-color: #050505; /* Fondo oscuro de salón arcade */
-  color: #cccccc; /* Texto base gris claro */
+  background-color: #050505;
+  color: #cccccc;
   font-family: 'Press Start 2P', monospace;
   display: flex;
   justify-content: center;
@@ -15,29 +14,23 @@ body {
   overflow: hidden;
 }
 
-/* Efecto de líneas de escaneo (Scanlines) de pantalla antigua */
+/* Efecto Pantalla Antigua (Scanlines) */
 body::after {
   content: " ";
   display: block;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 0; left: 0; bottom: 0; right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 4px;
   z-index: 10;
-  pointer-events: none;
+  pointer-events: none; /* Muy importante para poder hacer clic a los botones */
 }
 
-/* Chasis de la pantalla del juego */
 .contenedor-juego {
-  background-color: #1a1a1a; /* Gris oscuro para la interfaz interna */
-  border: 8px solid #555555; /* Marco de la cabina en gris medio */
+  background-color: #1a1a1a;
+  border: 8px solid #555555;
   border-radius: 20px;
-  box-shadow: 
-    0 0 0 6px #222222, 
-    inset 0 0 20px #000000;
+  box-shadow: 0 0 0 6px #222222, inset 0 0 20px #000000;
   padding: 40px 30px;
   max-width: 700px;
   width: 90%;
@@ -45,7 +38,6 @@ body::after {
   z-index: 2;
 }
 
-/* Alineación del marcador superior */
 .header-arcade {
   display: flex;
   justify-content: space-between;
@@ -55,22 +47,85 @@ body::after {
   line-height: 1.8;
 }
 
+/* Animación de flotación para el Fantasma */
+.ghost {
+  width: 50px;
+  margin-bottom: 20px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
 h1 {
   color: #ffffff; 
-  text-shadow: 4px 4px 0px #444444; /* Sombra pixelada rígida */
+  text-shadow: 4px 4px 0px #444444;
   font-size: 26px;
   line-height: 1.6;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
-/* Caja simuladora de consola de comandos */
+/* Interfaz de Navegación */
+.controles-arcade {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0d0d0d;
+  padding: 15px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.titulo-reto {
+  color: #fff;
+  font-size: 10px;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.btn-arcade {
+  background-color: #333;
+  color: #fff;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 10px;
+  border: 2px solid #666;
+  border-bottom: 4px solid #111;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.btn-arcade:hover:not(:disabled) {
+  background-color: #555;
+}
+
+.btn-arcade:active:not(:disabled) {
+  border-bottom: 2px solid #111;
+  transform: translateY(2px);
+}
+
+.btn-arcade:disabled {
+  background-color: #111;
+  color: #444;
+  border-color: #222;
+  cursor: not-allowed;
+}
+
+/* Pantalla de Resultados */
 .texto-consola {
   text-align: left;
-  background-color: #000000; /* Fondo negro absoluto */
+  background-color: #000000;
   padding: 20px;
   border: 2px solid #333333;
   margin-bottom: 30px;
+  min-height: 120px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 p {
@@ -80,14 +135,15 @@ p {
   margin: 0;
 }
 
-.gif-pixel {
-  width: 60px;
-  margin-bottom: 20px;
-  image-rendering: pixelated; /* Mantiene la nitidez de los píxeles */
-  filter: grayscale(100%) contrast(1.2); /* Remueve todo el color del elemento */
+.error {
+  color: #ff5555; /* Los errores saldrán en rojo retro */
 }
 
-/* Animación intermitente de inserción de créditos */
+/* Barra de scroll estilo retro */
+.texto-consola::-webkit-scrollbar { width: 10px; }
+.texto-consola::-webkit-scrollbar-track { background: #111; }
+.texto-consola::-webkit-scrollbar-thumb { background: #555; }
+
 .blinking-text {
   color: #ffffff;
   font-size: 14px;
