@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JS Arcade | Práctica de Funciones</title>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -44,15 +45,15 @@
       { file: 'reto-5.js', name: 'NIVEL 5: La caja fuerte' },
       { file: 'reto-6.js', name: 'NIVEL 6: Portero del evento' },
       { file: 'reto-7.js', name: 'NIVEL 7: Credenciales' },
-      { file: 'jefe-final.js', name: '☠️ JEFE FINAL ☠️' }
+      // Aquí están las espadas Arcade ASCII
+      { file: 'jefe-final.js', name: 'O==[===> JEFE FINAL <===]==O' }
     ];
     
     let currentIndex = 0;
 
-    // 1. Secuestramos console.log para enviarlo a nuestra pantalla HTML
     const originalLog = console.log;
     console.log = function(...args) {
-      originalLog.apply(console, args); // Mantiene el F12 funcionando
+      originalLog.apply(console, args); 
       const output = document.getElementById('pantalla-consola');
       if (output) {
           const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' ');
@@ -60,28 +61,23 @@
       }
     };
 
-    // 2. Atrapamos errores para que el usuario los vea en pantalla (Útil para Reto 5 y 7)
     window.onerror = function(message) {
       const output = document.getElementById('pantalla-consola');
       if (output) output.innerHTML += `<p class="error">> ERROR: ${message}</p>`;
     };
 
-    // 3. Cargamos los archivos JS dinámicamente cuando el usuario hace clic
     function cargarReto(index) {
       if(index < 0 || index >= retos.length) return;
       currentIndex = index;
       
-      // Actualizamos los textos y limpiamos la pantalla
       document.getElementById('titulo-reto').innerText = retos[currentIndex].name;
       document.getElementById('pantalla-consola').innerHTML = `<p style="color:#555;">> Ejecutando ${retos[currentIndex].file}...</p>`;
       
-      // Bloqueamos/Desbloqueamos botones según el nivel
       document.getElementById('btn-ant').disabled = (currentIndex === 0);
       document.getElementById('btn-sig').disabled = (currentIndex === retos.length - 1);
 
-      // Inyectamos el archivo .js elegido
       const script = document.createElement('script');
-      script.type = 'module'; // Permite que las variables no choquen al cambiar de reto
+      script.type = 'module'; 
       script.src = retos[currentIndex].file + '?v=' + Date.now(); 
       document.body.appendChild(script);
     }
@@ -89,7 +85,6 @@
     function anterior() { cargarReto(currentIndex - 1); }
     function siguiente() { cargarReto(currentIndex + 1); }
 
-    // Al iniciar, cargamos el nivel 1 automáticamente
     window.onload = () => cargarReto(0);
   </script>
 </body>

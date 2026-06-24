@@ -14,7 +14,7 @@ body {
   overflow: hidden;
 }
 
-/* Efecto Pantalla Antigua (Scanlines) */
+/* Efecto CRT Scanlines */
 body::after {
   content: " ";
   display: block;
@@ -23,14 +23,17 @@ body::after {
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 4px;
   z-index: 10;
-  pointer-events: none; /* Muy importante para poder hacer clic a los botones */
+  pointer-events: none; 
 }
 
+/* Chasis Arcade */
 .contenedor-juego {
   background-color: #1a1a1a;
   border: 8px solid #555555;
   border-radius: 20px;
-  box-shadow: 0 0 0 6px #222222, inset 0 0 20px #000000;
+  box-shadow: 
+    0 0 0 6px #222222, 
+    inset 0 0 20px #000000;
   padding: 40px 30px;
   max-width: 700px;
   width: 90%;
@@ -47,72 +50,65 @@ body::after {
   line-height: 1.8;
 }
 
-/* Animación de flotación para el Fantasma */
 .ghost {
   width: 50px;
   margin-bottom: 20px;
   animation: float 2.5s ease-in-out infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
-}
-
 h1 {
   color: #ffffff; 
-  text-shadow: 4px 4px 0px #444444;
+  text-shadow: 4px 4px 0px #444444; 
   font-size: 26px;
   line-height: 1.6;
   margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
-/* Interfaz de Navegación */
+/* Controles y Botones */
 .controles-arcade {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0d0d0d;
   padding: 15px;
-  border: 2px solid #333;
+  border: 2px solid #333333;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
 .titulo-reto {
-  color: #fff;
+  color: #ffffff;
   font-size: 10px;
-  text-shadow: 2px 2px 0px #000;
+  text-shadow: 2px 2px 0px #000000;
 }
 
 .btn-arcade {
-  background-color: #333;
-  color: #fff;
+  background-color: #333333;
+  color: #ffffff;
   font-family: 'Press Start 2P', monospace;
   font-size: 10px;
   padding: 10px;
-  border: 2px solid #666;
-  border-bottom: 4px solid #111;
+  border: 2px solid #666666;
+  border-bottom: 4px solid #111111;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s;
 }
 
 .btn-arcade:hover:not(:disabled) {
-  background-color: #555;
+  background-color: #555555;
 }
 
 .btn-arcade:active:not(:disabled) {
-  border-bottom: 2px solid #111;
+  border-bottom: 2px solid #111111;
   transform: translateY(2px);
 }
 
 .btn-arcade:disabled {
-  background-color: #111;
-  color: #444;
-  border-color: #222;
+  background-color: #111111;
+  color: #444444;
+  border-color: #222222;
   cursor: not-allowed;
 }
 
@@ -128,28 +124,31 @@ h1 {
   overflow-y: auto;
 }
 
-p {
+.texto-consola p {
   color: #aaaaaa;
   font-size: 10px;
   line-height: 2.2;
   margin: 0;
 }
 
-.error {
-  color: #ff5555; /* Los errores saldrán en rojo retro */
+.texto-consola .error {
+  color: #ff5555;
 }
 
-/* Barra de scroll estilo retro */
 .texto-consola::-webkit-scrollbar { width: 10px; }
-.texto-consola::-webkit-scrollbar-track { background: #111; }
-.texto-consola::-webkit-scrollbar-thumb { background: #555; }
+.texto-consola::-webkit-scrollbar-track { background: #111111; }
+.texto-consola::-webkit-scrollbar-thumb { background: #555555; }
 
+/* Animaciones */
 .blinking-text {
   color: #ffffff;
   font-size: 14px;
   animation: blinker 1s linear infinite;
 }
 
-@keyframes blinker {
-  50% { opacity: 0; }
+@keyframes blinker { 50% { opacity: 0; } }
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
 }
